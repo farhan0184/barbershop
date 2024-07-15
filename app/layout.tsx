@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Marcellus, Montserrat } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import CursorProvider from "@/components/CursorContext";
 
-const inter = Inter({ subsets: ["latin"] });
+const marcellus = Marcellus({
+  subsets: ["latin"],
+  variable: "--font-marcellus",
+  weight: ["400"]
+});
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="h-screen">
+      <body className={`${marcellus.variable} ${montserrat.variable} overflow-x-hidden`}>
+        <CursorProvider>
+          <Header />
+          {children}
+        </CursorProvider>
+      </body>
     </html>
   );
 }
